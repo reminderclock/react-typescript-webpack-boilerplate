@@ -8,7 +8,14 @@ const App = () => {
         type="text"
         displayType="thousandSeparator"
         placeholder="세자리"
-        value="1231321"
+        value={12345}
+      />
+      <InputFormat
+        type="text"
+        displayType="date"
+        delimiter="-"
+        placeholder="yy-mm-dd"
+        value={["2020", "1", "11", "11"]}
       />
     </AppWrapper>
   );
