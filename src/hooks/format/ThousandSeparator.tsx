@@ -10,11 +10,14 @@ export const setThousandSeparator = (
     ? getStrNum(data, inputValue)
     : getThousandSeparatorFormat(inputValue);
 };
+//1
+// numstr to string,,,
 export const getThousandSeparatorFormat = (inputValue: InputValue) => {
   return inputValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
+
+//2 string,,,, to numstr
 export const getStrNum = (data: string | number, inputValue: InputValue) => {
-  console.log(inputValue);
   const strNum = data.toString().replaceAll(/,/g, "");
   return isStrNum(strNum) ? strNum : inputValue;
 };
