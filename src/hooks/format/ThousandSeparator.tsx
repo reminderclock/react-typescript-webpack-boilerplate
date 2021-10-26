@@ -1,9 +1,9 @@
-import { InputValue } from "../../types/inferface";
+import { TInputValue } from "../../types/inferface";
 
 export const setThousandSeparator = (
-  data: InputValue,
+  data: TInputValue,
   isInput: boolean,
-  inputValue: InputValue
+  inputValue: TInputValue
 ) => {
   if (Array.isArray(data)) return data;
   return isInput
@@ -12,12 +12,12 @@ export const setThousandSeparator = (
 };
 //1
 // numstr to string,,,
-export const getThousandSeparatorFormat = (inputValue: InputValue) => {
+export const getThousandSeparatorFormat = (inputValue: TInputValue) => {
   return inputValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
 
 //2 string,,,, to numstr
-export const getStrNum = (data: string | number, inputValue: InputValue) => {
+export const getStrNum = (data: string | number, inputValue: TInputValue) => {
   const strNum = data.toString().replaceAll(/,/g, "");
   return isStrNum(strNum) ? strNum : inputValue;
 };

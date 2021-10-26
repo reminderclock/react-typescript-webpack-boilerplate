@@ -1,34 +1,22 @@
 import { useEffect, useReducer } from "react";
 import styled from "styled-components";
 import { InputFormatReducer } from "../hooks/InputFormatReducer";
-import { InputState } from "../types/inferface";
+import { IInputFormat, InputState } from "../types/inferface";
 import { getValidNumeral } from "../hooks/InitialValue";
 
-interface IInputFormat {
-  type: string;
-  delimiter?: string;
-  value: number | string | string[];
-  displayType: any;
-  dateForMat?: string[];
-  placeholder?: string;
-}
-
-const InputFormat = ({
-  value,
-  displayType,
-  placeholder,
-  type,
-  delimiter,
-}: IInputFormat) => {
+const InputFormat = (props: IInputFormat) => {
+  const { value, placeholder, type, delimiter } = props;
+  const formatProperty = Object.keys(props).filter((e) => props[e] === true)[0];
   const dataInitialState: InputState = {
-    inputValue: getValidNumeral(value, displayType),
+    inputValue: getValidNumeral(value, formatProperty),
+    formatType: formatProperty,
   };
   const [state, dispath] = useReducer(InputFormatReducer, dataInitialState);
-  const { inputValue } = state;
+  const { inputValue, formatType } = state;
   const handleChange = (event: any) => {
     let inputValue = event.target.value;
     dispath({
-      displayType: displayType,
+      displayType: formatType,
       payload: inputValue,
       isInput: true,
       delimiter: delimiter,
@@ -36,7 +24,7 @@ const InputFormat = ({
   };
   useEffect(() => {
     dispath({
-      displayType: displayType,
+      displayType: formatType,
       payload: inputValue,
       isInput: false,
       delimiter: delimiter,

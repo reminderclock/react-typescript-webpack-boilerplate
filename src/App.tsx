@@ -6,14 +6,14 @@ const App = () => {
     <AppWrapper>
       <InputFormat
         type="text"
-        displayType="thousandSeparator"
+        thousandSeparator={true}
         placeholder="세자리"
         value={"1234142"}
       />
       <InputFormat
         type="text"
-        displayType="date"
         delimiter="-"
+        date={true}
         placeholder="yy-mm-dd"
         value={["2020", "1", "11"]}
       />

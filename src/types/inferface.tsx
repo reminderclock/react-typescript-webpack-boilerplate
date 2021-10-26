@@ -1,12 +1,23 @@
 import { ActionType } from "../hooks/InputFormatReducer";
 
+export interface IInputFormat {
+  [key: string]: any;
+  thousandSeparator?: boolean;
+  date?: boolean;
+  type: string;
+  delimiter?: string;
+  value: TInputValue;
+  dateForMat?: string[];
+  placeholder?: string;
+}
 export interface InputState {
-  inputValue: InputValue | string;
+  inputValue: TInputValue | string;
+  formatType: any;
 }
 
 export interface thousandSeparator {
   displayType: ActionType.thousandSeparator;
-  payload: InputValue;
+  payload: TInputValue;
   isInput: boolean;
 }
 
@@ -18,4 +29,6 @@ export interface date {
 }
 
 export type Delimter = string;
-export type InputValue = string | number | string[];
+export type TInputValue = ThousandSeparatorType | DateType;
+export type DateType = string[];
+export type ThousandSeparatorType = string | number;

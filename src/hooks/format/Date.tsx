@@ -1,20 +1,24 @@
-import { Delimter, InputValue } from "../../types/inferface";
+import { Delimter, TInputValue } from "../../types/inferface";
 
 export const setDate = (
-  data: InputValue,
+  data: TInputValue,
   isInput: boolean,
   delimiter: Delimter,
-  inputValue: InputValue
+  inputValue: TInputValue
 ) => {
   return isInput
     ? getChangeDate(data, delimiter, inputValue)
     : getOutputDate(inputValue, delimiter);
 };
-export const isString = (x: InputValue) => {
+export const isString = (x: TInputValue) => {
   return Object.prototype.toString.call(x) === "[object String]";
 };
-const dateFormat = ["YYYY", "MM", "DD"];
-const getOutputDate = (inputValue: InputValue, delimiter: Delimter) => {
+export const isDate = (date: string) => {
+  const regex = RegExp(/^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/);
+  return regex.test(date);
+};
+export const dateFormat = ["YYYY", "MM", "DD"];
+const getOutputDate = (inputValue: TInputValue, delimiter: Delimter) => {
   return Array.isArray(inputValue)
     ? inputValue
         .map((e, index) => {
@@ -25,9 +29,9 @@ const getOutputDate = (inputValue: InputValue, delimiter: Delimter) => {
     : inputValue;
 };
 const getChangeDate = (
-  data: InputValue,
+  data: TInputValue,
   delimiter: Delimter,
-  inputValue: InputValue
+  inputValue: TInputValue
 ) => {
   return data.toString().split("-");
 };

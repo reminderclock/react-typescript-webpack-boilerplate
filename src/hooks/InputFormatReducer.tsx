@@ -1,8 +1,8 @@
 import {
   date,
   InputState,
-  InputValue,
   thousandSeparator,
+  TInputValue,
 } from "../types/inferface";
 import { setDate } from "./format/Date";
 import { setThousandSeparator } from "./format/ThousandSeparator";
@@ -14,7 +14,7 @@ export enum ActionType {
 export type InputActions = thousandSeparator | date;
 export const InputFormatReducer = (state: InputState, action: InputActions) => {
   switch (action.displayType) {
-    case ActionType.thousandSeparator:
+    case "thousandSeparator":
       return {
         ...state,
         inputValue: setThousandSeparator(
@@ -23,7 +23,7 @@ export const InputFormatReducer = (state: InputState, action: InputActions) => {
           state.inputValue
         ),
       };
-    case ActionType.date:
+    case "date":
       return {
         ...state,
         inputValue: setDate(
@@ -37,6 +37,6 @@ export const InputFormatReducer = (state: InputState, action: InputActions) => {
       return state;
   }
 };
-const isArray = (data: InputValue) => {
+const isArray = (data: TInputValue) => {
   return Array.isArray(data);
 };
